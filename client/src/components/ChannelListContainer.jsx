@@ -16,16 +16,16 @@ const ChannelListContainer = () => {
         <Header />
         <ChannelSearch />
         <ChannelList
-          filters={{}}
-          channelRenderFilterFn={{}}
+          // filters={{}}
+          // channelRenderFilterFn={{}}
           List={(listProps) => <TeamChannelList {...listProps} type="team" />}
           Preview={(previewProps) => (
             <TeamChannelPreview {...previewProps} type="team" />
           )}
         />
         <ChannelList
-          filters={{}}
-          channelRenderFilterFn={{}}
+          // filters={{}}
+          // channelRenderFilterFn={{}}
           List={(listProps) => (
             <TeamChannelList {...listProps} type="messaging" />
           )}

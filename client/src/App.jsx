@@ -5,12 +5,27 @@ import { API_KEY } from "./constants/constants";
 import ChannelListContainer from "./components/ChannelListContainer";
 import ChannelContainer from "./components/ChannelContainer";
 import Auth from "./components/Auth";
+import Cookies from "universal-cookie";
 import "./styles/index.css";
 
 const App = () => {
+  const cookies = new Cookies();
+  const authToken = cookies.get("token");
   const client = StreamChat.getInstance(API_KEY);
-  const authToken = false;
-  if(!authToken) return <Auth />
+  if (authToken) {
+    client.connectUser(
+      {
+        id: cookies.get("userId"),
+        name: cookies.get("username"),
+        fullName: cookies.get("fullName"),
+        image: cookies.get("avatarURL"),
+        hashedPassword: cookies.get("hashedPassword"),
+        phoneNumber: cookies.get("phoneNumber"),
+      },
+      authToken
+    );
+  }
+  if (!authToken) return <Auth />;
   return (
     <div className="app_wrapper">
       <Chat client={client} theme="theme dark">

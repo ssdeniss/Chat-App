@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
 import signBg from "../assets/signup.jpg";
+import axios from "axios";
 const Auth = () => {
+  const cookies = new Cookies();
   const initialState = {
     fullName: "",
     userName: "",
@@ -18,9 +20,29 @@ const Auth = () => {
   const switchMode = () => {
     setIsSignup((prev) => !prev);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    const { fullName, userName, password, avatarURL, phoneNumber } = form;
+    const URL = "http://localhost:5000/auth";
+    const {
+      data: { token, userId, hashedPassword },
+    } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+      userName,
+      password,
+      avatarURL,
+      phoneNumber,
+      fullName,
+    });
+    cookies.set("token", token);
+    cookies.set("username", userName);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+    if (isSignup) {
+      cookies.set("phoneNumber", phoneNumber);
+      cookies.set("avatarURL", avatarURL);
+      cookies.set("hashedPassword", hashedPassword);
+    }
+    window.location.reload();
   };
   return (
     <div className="auth__form-container">
