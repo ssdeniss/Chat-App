@@ -31,7 +31,9 @@ body {
   padding: 20px;
   background: #7686f5;
 }
-
+.str-chat__channel-list-react {
+  background: #7686f5;
+}
 .auth__form-container_image {
   flex: 3;
   display: flex;

@@ -1,5 +1,5 @@
 import React from "react";
-import { AddChanel } from "../assets";
+import { AddChanel } from "../../assets";
 
 const TeamChannelList = ({ children, error = false, loading, type }) => {
   if (error) {

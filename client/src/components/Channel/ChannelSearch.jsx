@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SearchIcon } from "../assets";
+import { SearchIcon } from "../../assets";
 
 const ChannelSearch = () => {
   const [query, setQuery] = useState("");
